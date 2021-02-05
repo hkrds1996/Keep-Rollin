@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class DrawLine : MonoBehaviour
 
     public GameObject linePrefab;
     public GameObject currentLine;
-
+    public int globalVariable;
     public LineRenderer lineRenderer;
     public EdgeCollider2D edgeCollider;
     public List<Vector2> fingerPositions;
@@ -24,6 +25,7 @@ public class DrawLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        globalVariable = Int32.Parse(SceneControlls.globalVariable);
         if (Input.GetMouseButtonDown(0))
         {
             CreateLine();
@@ -40,6 +42,18 @@ public class DrawLine : MonoBehaviour
 
     void CreateLine()
     {
+        if (globalVariable == 0)
+        {
+            linePrefab = (GameObject)Resources.Load("IceLine", typeof(GameObject));
+        }
+        else if (globalVariable == 1)
+        {
+            linePrefab = (GameObject)Resources.Load("MetalLine", typeof(GameObject));
+        }
+        else
+        {
+            linePrefab = (GameObject)Resources.Load("WoodLine", typeof(GameObject));
+        }
         currentLine = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
         lineRenderer = currentLine.GetComponent<LineRenderer>();
         edgeCollider = currentLine.GetComponent<EdgeCollider2D>();
