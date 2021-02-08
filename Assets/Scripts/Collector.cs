@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class Collector : MonoBehaviour
 {
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collision.collider.tag == "star")
+        if(collider.tag == "star")
         {
             int socre = Int32.Parse(SceneControlls.score);
-            Destroy(collision.gameObject);
+            Destroy(collider.gameObject);
             socre ++;
             SceneControlls.ChangeScore(socre);
             string s = "Score: " + socre.ToString();

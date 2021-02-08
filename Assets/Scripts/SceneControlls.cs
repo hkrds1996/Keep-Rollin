@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class SceneControlls : MonoBehaviour
 {
     public static string materialType = "0";
-    public static string budget = "2000";
+    public static string budget = "1000";
     public static string score = "0";
 
     public void RestartGame()
@@ -15,7 +15,7 @@ public class SceneControlls : MonoBehaviour
         GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         materialType = "0";
-        budget = "2000";
+        budget = "1000";
         score = "0";
     }
     
