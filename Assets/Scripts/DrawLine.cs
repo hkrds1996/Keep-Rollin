@@ -9,13 +9,12 @@ public class DrawLine : MonoBehaviour
 
     public GameObject linePrefab;
     public GameObject currentLine;
-    public int globalVariable;
     public LineRenderer lineRenderer;
     public EdgeCollider2D edgeCollider;
-    public List<Vector2> fingerPositions;
+    public List<Vector2> fingerPositions;    
 
-
-
+    private int materialType;
+    private int budget;
 
     void Start()
     {
@@ -25,28 +24,32 @@ public class DrawLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        globalVariable = Int32.Parse(SceneControlls.globalVariable);
-        if (Input.GetMouseButtonDown(0))
-        {
-            CreateLine();
-        }
-        if (Input.GetMouseButton(0))
-        {
-            Vector2 tempFingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Vector2.Distance(tempFingerPos, fingerPositions[fingerPositions.Count-1])>0.1f)
+        materialType = Int32.Parse(SceneControlls.materialType);
+        budget = Int32.Parse(SceneControlls.budget);
+        if(budget > 0){
+            if (Input.GetMouseButtonDown(0))
             {
-                UpdateLine(tempFingerPos);
+                CreateLine();
             }
-        }
+            if (Input.GetMouseButton(0)){
+                Vector2 tempFingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                float distance = Vector2.Distance(tempFingerPos, fingerPositions[fingerPositions.Count-1]);
+                if (distance>0.1f){
+                    UpdateLine(tempFingerPos);
+                    budget = (int)(budget - distance*costOfMaterial(materialType));
+                    SceneControlls.ChangeBudget(budget >=0? budget:0);
+                }
+            }
+        }        
     }
 
     void CreateLine()
     {
-        if (globalVariable == 0)
+        if (materialType == 0)
         {
             linePrefab = (GameObject)Resources.Load("IceLine", typeof(GameObject));
         }
-        else if (globalVariable == 1)
+        else if (materialType == 1)
         {
             linePrefab = (GameObject)Resources.Load("MetalLine", typeof(GameObject));
         }
@@ -72,4 +75,15 @@ public class DrawLine : MonoBehaviour
         lineRenderer.SetPosition(lineRenderer.positionCount - 1, newFingerPos);
         edgeCollider.points = fingerPositions.ToArray();
     }
+
+    int costOfMaterial(int type){
+        if(type == 0){
+            return 100;
+        }else if(type == 1){
+            return 50;
+        }else{
+            return 10;
+        }
+    }
+
 }

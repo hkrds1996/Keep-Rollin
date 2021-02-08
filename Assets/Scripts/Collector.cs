@@ -1,18 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Collector : MonoBehaviour
 {
-    public int count = 0;
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.collider.tag == "star")
         {
+            int socre = Int32.Parse(SceneControlls.score);
             Destroy(collision.gameObject);
-            count++;
-            string s = "Score: " + count.ToString();
+            socre ++;
+            SceneControlls.ChangeScore(socre);
+            string s = "Score: " + socre.ToString();
             GameObject.FindGameObjectWithTag("scorebox").GetComponent<Text>().text = s;
         }
     }

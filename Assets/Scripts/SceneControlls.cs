@@ -6,39 +6,35 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class SceneControlls : MonoBehaviour
 {
-    public static string globalVariable = "0";
+    public static string materialType = "0";
+    public static string budget = "2000";
+    public static string score = "0";
 
     public void RestartGame()
     {
         GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        materialType = "0";
+        budget = "2000";
+        score = "0";
     }
     
     public void StartGame()
     {
         GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
-
-    public void clickButton()
-    {
-        
-        int value = Int32.Parse(globalVariable) + 1;
-        value = value % 3;
-        globalVariable = value.ToString();
-        string s = "";
-        if (value == 0)
-        {
-            s = "ice material";
-        }
-        else if (value == 1)
-        {
-            s = "metal material";
-        }
-        else
-        {
-            s = "wood material";
-        }
-        GameObject.Find("IceMaterial").GetComponentInChildren<Text>().text = s;
+    
+    public static void ChangeType(int n){
+        SceneControlls.materialType = n.ToString();
     }
 
+    public static void ChangeScore(int n){
+        SceneControlls.score = n.ToString();
+    }
+
+    public static void ChangeBudget(int n){
+        SceneControlls.budget = n.ToString();
+        string s = "Budget: " + budget.ToString();
+        GameObject.Find("Budget").GetComponent<Text>().text = s;
+    }
 }
