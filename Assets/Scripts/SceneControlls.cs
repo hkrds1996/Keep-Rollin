@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,4 +37,20 @@ public class SceneControlls : MonoBehaviour
         string s = "Budget: " + budget.ToString();
         GameObject.Find("Budget").GetComponent<Text>().text = s;
     }
+
+    public void LoadLevel1()
+    {
+        SceneManager.LoadScene("New Scene");
+    }
+
+    public void LoadHome()
+    {
+        SceneManager.LoadScene("HomeScreen");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
 }
