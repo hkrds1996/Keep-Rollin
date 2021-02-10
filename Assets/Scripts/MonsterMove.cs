@@ -63,7 +63,7 @@ public class MonsterMove : MonoBehaviour
         if (distance1 < 0.37)
         {
             System.Threading.Thread.Sleep(200);
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         tempX = Mathf.Clamp(transform.position.x, leftBorder, rightBorder);

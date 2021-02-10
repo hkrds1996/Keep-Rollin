@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Collector : MonoBehaviour
@@ -16,6 +17,17 @@ public class Collector : MonoBehaviour
             SceneControlls.ChangeScore(socre);
             string s = "Score: " + socre.ToString();
             GameObject.FindGameObjectWithTag("scorebox").GetComponent<Text>().text = s;
+        }
+        else if(collider.tag == "Gate")
+        {
+            if (SceneManager.GetActiveScene().name == "Level6")
+            {
+                SceneManager.LoadScene("HomeScreen");
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
         }
     }
 }
