@@ -13,7 +13,11 @@ public class SceneControlls : MonoBehaviour
     public void RestartGame()
     {
         GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CustomLoadScreen(SceneManager.GetActiveScene().name);
+    }
+
+    public static void CustomLoadScreen(string name){
+        SceneManager.LoadScene(name);
         materialType = "0";
         budget = "1000";
         score = "0";
@@ -45,31 +49,31 @@ public class SceneControlls : MonoBehaviour
 
     public void LoadScene1()
     {
-        SceneManager.LoadScene("Level1");
+        CustomLoadScreen("Level1");
     }
     public void LoadScene2()
     {
-        SceneManager.LoadScene("Level2");
+        CustomLoadScreen("Level2");
     }
     public void LoadScene3()
     {
-        SceneManager.LoadScene("Level3");
+        CustomLoadScreen("Level3");
     }
     public void LoadScene4()
     {
-        SceneManager.LoadScene("Level4");
+        CustomLoadScreen("Level4");
     }
     public void LoadScene5()
     {
-        SceneManager.LoadScene("Level5");
+        CustomLoadScreen("Level5");
     }
     public void LoadScene6()
     {
-        SceneManager.LoadScene("Level6");
+        CustomLoadScreen("Level6");
     }
     public void LoadHomeScreen()
     {
-        SceneManager.LoadScene("HomeScreen");
+        CustomLoadScreen("HomeScreen");
     }
 
     public void LoadPrevScreen()
@@ -81,6 +85,9 @@ public class SceneControlls : MonoBehaviour
         else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            materialType = "0";
+            budget = "1000";
+            score = "0";
         }
     }
 
@@ -93,6 +100,9 @@ public class SceneControlls : MonoBehaviour
         else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            materialType = "0";
+            budget = "1000";
+            score = "0";
         }
     }
 }

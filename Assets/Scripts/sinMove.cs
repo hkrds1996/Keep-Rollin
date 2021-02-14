@@ -52,7 +52,7 @@ public class sinMove : MonoBehaviour
         if (distance1 < 0.37)
         {
             System.Threading.Thread.Sleep(300);
-            SceneManager.LoadScene(0);
+            SceneControlls.CustomLoadScreen(SceneManager.GetActiveScene().name);
         }
 
         tempX = Mathf.Clamp(transform.position.x, leftBorder, rightBorder);
