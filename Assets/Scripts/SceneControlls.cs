@@ -13,7 +13,11 @@ public class SceneControlls : MonoBehaviour
     public void RestartGame()
     {
         GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        CustomLoadScreen(SceneManager.GetActiveScene().name);
+    }
+
+    public static void CustomLoadScreen(string name){
+        SceneManager.LoadScene(name);
         materialType = "0";
         budget = "1000";
         score = "0";
@@ -22,6 +26,11 @@ public class SceneControlls : MonoBehaviour
     public void StartGame()
     {
         GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
     
     public static void ChangeType(int n){
@@ -36,5 +45,64 @@ public class SceneControlls : MonoBehaviour
         SceneControlls.budget = n.ToString();
         string s = "Budget: " + budget.ToString();
         GameObject.Find("Budget").GetComponent<Text>().text = s;
+    }
+
+    public void LoadScene1()
+    {
+        CustomLoadScreen("Level1");
+    }
+    public void LoadScene2()
+    {
+        CustomLoadScreen("Level2");
+    }
+    public void LoadScene3()
+    {
+        CustomLoadScreen("Level3");
+    }
+    public void LoadScene4()
+    {
+        CustomLoadScreen("Level4");
+    }
+    public void LoadScene5()
+    {
+        CustomLoadScreen("Level5");
+    }
+    public void LoadScene6()
+    {
+        CustomLoadScreen("Level6");
+    }
+    public void LoadHomeScreen()
+    {
+        CustomLoadScreen("HomeScreen");
+    }
+
+    public void LoadPrevScreen()
+    {
+        if(SceneManager.GetActiveScene().name == "Level1")
+        {
+            LoadHomeScreen();
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            materialType = "0";
+            budget = "1000";
+            score = "0";
+        }
+    }
+
+    public void LoadNextScreen()
+    {
+        if (SceneManager.GetActiveScene().name == "Level6")
+        {
+            LoadHomeScreen();
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            materialType = "0";
+            budget = "1000";
+            score = "0";
+        }
     }
 }

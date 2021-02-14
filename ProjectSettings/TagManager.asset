@@ -7,6 +7,7 @@ TagManager:
   - scorebox
   - star
   - PlayerBall
+  - Gate
   layers:
   - Default
   - TransparentFX
