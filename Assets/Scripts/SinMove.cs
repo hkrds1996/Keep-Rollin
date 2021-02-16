@@ -54,7 +54,7 @@ public class SinMove : MonoBehaviour
         width = rightBorder - leftBorder;
         height = topBorder - downBorder;
         archorX = Mathf.Clamp(transform.position.x, leftBorder, rightBorder);
-        archorY  = Mathf.Clamp(transform.position.y, downBorder, topBorder);
+        archorY = Mathf.Clamp(transform.position.y, downBorder, topBorder);
     }
 
     // Update is called once per frame
