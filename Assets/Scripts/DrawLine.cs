@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DrawLine : MonoBehaviour
 {
@@ -11,8 +12,7 @@ public class DrawLine : MonoBehaviour
     public GameObject currentLine;
     public LineRenderer lineRenderer;
     public EdgeCollider2D edgeCollider;
-    public List<Vector2> fingerPositions;    
-
+    public List<Vector2> fingerPositions;        
     private int materialType;
     private int budget;
 
@@ -25,7 +25,7 @@ public class DrawLine : MonoBehaviour
     void Update()
     {
         materialType = Int32.Parse(SceneControlls.materialType);
-        budget = Int32.Parse(SceneControlls.budget);
+        budget = SceneControlls.budget[SceneManager.GetActiveScene().buildIndex - 1];
         if(budget > 0){
             if (Input.GetMouseButtonDown(0))
             {

@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class SceneControlls : MonoBehaviour
 {
     public static string materialType = "0";
-    public static string budget = "1000";
+    public static int[] budget = { 1000, 1000, 1000, 1000, 240, 1000 };
+    private static int[] defaultBudget = { 1000, 1000, 1000, 1000, 240, 1000 };
     public static string score = "0";
 
     public void RestartGame()
@@ -19,7 +20,9 @@ public class SceneControlls : MonoBehaviour
     public static void CustomLoadScreen(string name){
         SceneManager.LoadScene(name);
         materialType = "0";
-        budget = "1000";
+        for(int i = 0; i < budget.Length; ++i){
+            budget[i] = defaultBudget[i];
+        }
         score = "0";
     }
     
@@ -42,8 +45,8 @@ public class SceneControlls : MonoBehaviour
     }
 
     public static void ChangeBudget(int n){
-        SceneControlls.budget = n.ToString();
-        string s = "Budget: " + budget.ToString();
+        budget[SceneManager.GetActiveScene().buildIndex - 1] = n;
+        string s = "Budget: " + n.ToString();
         GameObject.Find("Budget").GetComponent<Text>().text = s;
     }
 
@@ -86,7 +89,7 @@ public class SceneControlls : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             materialType = "0";
-            budget = "1000";
+            budget[SceneManager.GetActiveScene().buildIndex - 2] = defaultBudget[SceneManager.GetActiveScene().buildIndex - 2];
             score = "0";
         }
     }
@@ -101,7 +104,7 @@ public class SceneControlls : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             materialType = "0";
-            budget = "1000";
+            budget[SceneManager.GetActiveScene().buildIndex] = defaultBudget[SceneManager.GetActiveScene().buildIndex];
             score = "0";
         }
     }
