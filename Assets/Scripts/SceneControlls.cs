@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class SceneControlls : MonoBehaviour
 {
     public static string materialType = "0";
-    public static int[] budget = { 1000, 1000, 1000, 1000, 240, 1000 };
-    private static int[] defaultBudget = { 1000, 1000, 1000, 1000, 240, 1000 };
+    public static int[] budget = { 500, 400, 1000, 1000, 240, 500 };
+    private static int[] defaultBudget = { 500, 400, 1000, 1000, 240, 500 };
     public static string score = "0";
 
     public void RestartGame()

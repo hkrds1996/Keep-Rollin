@@ -608,12 +608,12 @@ PrefabInstance:
     - target: {fileID: 3123200815354038682, guid: 102697d884a1a744992f5c19e8a5532b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.468505
+      value: -4.57
       objectReference: {fileID: 0}
     - target: {fileID: 3123200815354038682, guid: 102697d884a1a744992f5c19e8a5532b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.29
+      value: -0.96
       objectReference: {fileID: 0}
     - target: {fileID: 3123200815354038682, guid: 102697d884a1a744992f5c19e8a5532b,
         type: 3}
@@ -2577,7 +2577,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Budget: 1000'
+  m_Text: 'Budget: 500'
 --- !u!222 &1686375096
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3078,12 +3078,12 @@ PrefabInstance:
     - target: {fileID: 3377430343214637988, guid: e0821195bc00bbe49a94d4514347eb38,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.29
+      value: -7.74
       objectReference: {fileID: 0}
     - target: {fileID: 3377430343214637988, guid: e0821195bc00bbe49a94d4514347eb38,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.06
+      value: 4.69
       objectReference: {fileID: 0}
     - target: {fileID: 3377430343214637988, guid: e0821195bc00bbe49a94d4514347eb38,
         type: 3}

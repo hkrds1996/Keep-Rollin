@@ -2839,7 +2839,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Budget: 1000'
+  m_Text: 'Budget: 400'
 --- !u!222 &1686375096
 CanvasRenderer:
   m_ObjectHideFlags: 0
