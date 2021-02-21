@@ -51,6 +51,11 @@ public class SceneControlls : MonoBehaviour
         GameObject.Find("Budget").GetComponent<Text>().text = s;
     }
 
+    public void LoadScreenInstruction()
+    {
+        CustomLoadScreen("Instructions");
+    }
+
     public void LoadScene1()
     {
         CustomLoadScreen("Level1");
