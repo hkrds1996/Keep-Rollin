@@ -29,6 +29,7 @@ public class SceneControlls : MonoBehaviour
     public void StartGame()
     {
         GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
 
     public void ExitGame()
