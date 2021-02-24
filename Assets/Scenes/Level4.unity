@@ -2153,7 +2153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   rig: {fileID: 1520348768}
-  force: 350
+  force: 100
   isHorizontal: 1
   leftBorder: 0
   rightBorder: 0
@@ -2863,7 +2863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   rig: {fileID: 1749899846}
-  force: 300
+  force: 100
   isHorizontal: 0
   leftBorder: 0
   rightBorder: 0

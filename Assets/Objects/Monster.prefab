@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 7973459366263672437}
   - component: {fileID: 7973459366263672436}
   m_Layer: 0
-  m_Name: Monster1
+  m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   rig: {fileID: 7973459366263672437}
-  force: 300
+  force: 100
   isHorizontal: 1
   leftBorder: 0
   rightBorder: 0

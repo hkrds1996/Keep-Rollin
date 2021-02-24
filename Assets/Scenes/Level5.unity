@@ -1699,7 +1699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   rig: {fileID: 1075438307}
-  force: 300
+  force: 100
   isHorizontal: 0
   leftBorder: 0
   rightBorder: 0
@@ -2018,7 +2018,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   rig: {fileID: 1171720351}
-  force: 300
+  force: 100
   isHorizontal: 1
   leftBorder: 0
   rightBorder: 0

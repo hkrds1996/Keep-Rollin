@@ -9,11 +9,11 @@ public class MaterialsDropDown : MonoBehaviour
     void Start()
     {
         Dropdown.OptionData data1 = new Dropdown.OptionData();
-        data1.text = "Ice Material";
+        data1.text = "Ice Material Line";
         Dropdown.OptionData data2 = new Dropdown.OptionData();
-        data2.text = "Metal Material";
+        data2.text = "Metal Material Line";
         Dropdown.OptionData data3 = new Dropdown.OptionData();
-        data3.text = "Wood Material";
+        data3.text = "Wood Material Line";
         dpn = transform.GetComponent<Dropdown>();
         dpn.options.Add(data1);
         dpn.options.Add(data2);

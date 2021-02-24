@@ -1068,7 +1068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   rig: {fileID: 543409337}
-  force: 300
+  force: 100
   isHorizontal: 0
   leftBorder: 0
   rightBorder: 0
@@ -1316,6 +1316,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7973459366263672436, guid: d96e3b68ee1df704ba9377d0f31afb16,
+        type: 3}
+      propertyPath: force
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7973459366263672439, guid: d96e3b68ee1df704ba9377d0f31afb16,
         type: 3}
       propertyPath: m_Name
@@ -1384,6 +1389,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973459366263672436, guid: d96e3b68ee1df704ba9377d0f31afb16,
+        type: 3}
+      propertyPath: force
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7973459366263672436, guid: d96e3b68ee1df704ba9377d0f31afb16,
         type: 3}
