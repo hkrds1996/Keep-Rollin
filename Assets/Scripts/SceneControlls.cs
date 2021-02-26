@@ -32,7 +32,9 @@ public class SceneControlls : MonoBehaviour
     }
     
     public void Update(){
-        ChangeBudget(budget[SceneManager.GetActiveScene().buildIndex - 1]);
+        if(SceneManager.GetActiveScene().buildIndex - 1 < budget.Length && SceneManager.GetActiveScene().buildIndex - 1 >=0){
+            ChangeBudget(budget[SceneManager.GetActiveScene().buildIndex - 1]);
+        }
     }
     
     public void StartGame()
@@ -130,28 +132,13 @@ public class SceneControlls : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name == "Level1")
         {
-            LoadHomeScreen();
+            CustomLoadScreen("HomeScreen");
         }
         else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             materialType = "0";
             budget[SceneManager.GetActiveScene().buildIndex - 2] = defaultBudget[SceneManager.GetActiveScene().buildIndex - 2];
-            score = "0";
-        }
-    }
-
-    public void LoadNextScreen()
-    {
-        if (SceneManager.GetActiveScene().name == "Level6")
-        {
-            LoadHomeScreen();
-        }
-        else
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            materialType = "0";
-            budget[SceneManager.GetActiveScene().buildIndex] = defaultBudget[SceneManager.GetActiveScene().buildIndex];
             score = "0";
         }
     }

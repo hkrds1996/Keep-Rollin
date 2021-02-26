@@ -22,11 +22,12 @@ public class Collector : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name == "Level6")
             {
+
                 SceneManager.LoadScene("HomeScreen");
             }
             else
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                SceneControlls.CustomLoadScreen("Level"+(SceneManager.GetActiveScene().buildIndex + 1));
             }
         }
     }
