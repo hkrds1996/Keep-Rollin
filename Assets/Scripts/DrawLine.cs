@@ -26,7 +26,7 @@ public class DrawLine : MonoBehaviour
     {
         materialType = Int32.Parse(SceneControlls.materialType);
         budget = SceneControlls.budget[SceneManager.GetActiveScene().buildIndex - 1];
-        if(budget > 0){
+        if(budget > 0 && materialType != 3){
             if (Input.GetMouseButtonDown(0))
             {
                 CreateLine();
@@ -36,11 +36,22 @@ public class DrawLine : MonoBehaviour
                 float distance = Vector2.Distance(tempFingerPos, fingerPositions[fingerPositions.Count-1]);
                 if (distance>0.1f){
                     UpdateLine(tempFingerPos);
+                    int oldBudget  = budget;
                     budget = (int)(budget - distance*costOfMaterial(materialType));
                     SceneControlls.ChangeBudget(budget >=0? budget:0);
+                    SceneControlls.AddLineBudget(currentLine, oldBudget - (budget >=0? budget:0));                    
                 }
             }
-        }        
+        }
+        if(materialType == 3){
+            if(Input.GetMouseButtonDown(0)){
+                Vector3 pos = Input.mousePosition;
+                Collider2D hitCollider = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(pos));
+                if (hitCollider != null && hitCollider.CompareTag ("Line")) {                    
+                    SceneControlls.RemoveLine(hitCollider.gameObject);
+                }
+            }
+        }
     }
 
     void CreateLine()
@@ -53,7 +64,7 @@ public class DrawLine : MonoBehaviour
         {
             linePrefab = (GameObject)Resources.Load("MetalLine", typeof(GameObject));
         }
-        else
+        else if(materialType == 2)
         {
             linePrefab = (GameObject)Resources.Load("WoodLine", typeof(GameObject));
         }
@@ -65,7 +76,8 @@ public class DrawLine : MonoBehaviour
         fingerPositions.Add(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         lineRenderer.SetPosition(0, fingerPositions[0]);
         lineRenderer.SetPosition(1, fingerPositions[1]);
-        edgeCollider.points = fingerPositions.ToArray();
+        edgeCollider.points = fingerPositions.ToArray();      
+        GameObject.DontDestroyOnLoad(currentLine);  
     }
 
     void UpdateLine(Vector2 newFingerPos)

@@ -10,20 +10,29 @@ public class SceneControlls : MonoBehaviour
     public static int[] budget = { 500, 400, 1000, 1000, 240, 500 };
     private static int[] defaultBudget = { 500, 400, 1000, 1000, 240, 500 };
     public static string score = "0";
+    public static Dictionary<GameObject, int> map = new Dictionary<GameObject, int>();
 
     public void RestartGame()
     {
-        GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        CustomLoadScreen(SceneManager.GetActiveScene().name);
+        GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        materialType = "0";        
+        score = "0";
+        
     }
 
     public static void CustomLoadScreen(string name){
+        DestroyAllTheLine();
         SceneManager.LoadScene(name);
         materialType = "0";
         for(int i = 0; i < budget.Length; ++i){
             budget[i] = defaultBudget[i];
         }
         score = "0";
+    }
+    
+    public void Update(){
+        ChangeBudget(budget[SceneManager.GetActiveScene().buildIndex - 1]);
     }
     
     public void StartGame()
@@ -51,6 +60,38 @@ public class SceneControlls : MonoBehaviour
         GameObject.Find("Budget").GetComponent<Text>().text = s;
     }
 
+    private static int GetValue(GameObject obj){
+        foreach(KeyValuePair<GameObject, int>  item in map)
+        {
+            if(item.Key.GetInstanceID() == obj.GetInstanceID()){
+                return item.Value;
+            }
+        }
+        map.Add(obj, 0);
+        return 0;
+    }
+
+    public static void AddLineBudget (GameObject obj, int budget){
+        int currentBudget = GetValue(obj);
+        map[obj] = currentBudget + budget;      
+    }
+
+    public static void RemoveLine(GameObject obj){       
+        int restoreBuget = GetValue(obj);
+        map.Remove(obj);
+        Destroy(obj);
+        int newBuget = budget[SceneManager.GetActiveScene().buildIndex - 1] + restoreBuget;
+        ChangeBudget(newBuget);
+    }
+
+    public static void DestroyAllTheLine(){
+        foreach(KeyValuePair<GameObject, int>  item in map)
+        {   
+            GameObject obj = item.Key;
+            Destroy(obj);
+        }
+        map.Clear();
+    }
     public void LoadScreenInstruction()
     {
         CustomLoadScreen("Instructions");

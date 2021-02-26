@@ -14,10 +14,13 @@ public class MaterialsDropDown : MonoBehaviour
         data2.text = "Metal Material Line";
         Dropdown.OptionData data3 = new Dropdown.OptionData();
         data3.text = "Wood Material Line";
+        Dropdown.OptionData data4 = new Dropdown.OptionData();
+        data4.text = "Eraser";
         dpn = transform.GetComponent<Dropdown>();
         dpn.options.Add(data1);
         dpn.options.Add(data2);
         dpn.options.Add(data3);
+        dpn.options.Add(data4);
     }
 
         public void Drop_select()
