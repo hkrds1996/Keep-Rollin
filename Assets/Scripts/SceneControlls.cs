@@ -17,6 +17,11 @@ public class SceneControlls : MonoBehaviour
         restartGameSub();
     }
 
+    public void NewGame()
+    {
+        CustomLoadScreen(SceneManager.GetActiveScene().name);
+    }
+
     public static void restartGameSub()
     {
         GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;        
