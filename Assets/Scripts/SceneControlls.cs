@@ -14,11 +14,15 @@ public class SceneControlls : MonoBehaviour
 
     public void RestartGame()
     {
+        restartGameSub();
+    }
+
+    public static void restartGameSub()
+    {
         GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         materialType = "0";        
-        score = "0";
-        
+        score = "0";        
     }
 
     public static void CustomLoadScreen(string name){
