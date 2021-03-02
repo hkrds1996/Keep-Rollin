@@ -22,6 +22,8 @@ public class SinMove : MonoBehaviour
     private float height;
     GameObject obj1;
 
+    public AudioSource ac;
+
     float tempX = 0f;
     float tempY = 0f;
 
@@ -66,8 +68,9 @@ public class SinMove : MonoBehaviour
 
         if (distance1 < 0.37)
         {
+            ac.Play();
             System.Threading.Thread.Sleep(300);
-            SceneControlls.CustomLoadScreen(SceneManager.GetActiveScene().name);
+            SceneControlls.restartGameSub();
         }
 
         tempX = Mathf.Clamp(transform.position.x, leftBorder, rightBorder);

@@ -11,6 +11,7 @@ public class SpringBoard : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _animator.enabled = false;
     }
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public class SpringBoard : MonoBehaviour
             GameObject playerBall = GameObject.FindGameObjectWithTag("PlayerBall");
             if(playerBall.transform.position.y > this.transform.position.y){
                 _animator.SetTrigger("jump");
+                _animator.enabled = true;
                 Rigidbody2D playerBallRig = playerBall.GetComponent<Rigidbody2D>();
                 // double Vx = playerBallRig.velocity.x;
                 // double Vy = playerBallRig.velocity.y;

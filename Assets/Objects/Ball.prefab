@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3377430343214637988}
   - component: {fileID: 3377430343214637991}
   - component: {fileID: 3377430343214637990}
+  - component: {fileID: 4669878909960797454}
   m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: PlayerBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +53,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &3377430343214637990
 CircleCollider2D:
@@ -70,6 +71,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.014429569}
   serializedVersion: 2
   m_Radius: 0.24206138
+--- !u!114 &4669878909960797454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3377430343214637985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d67769e12efdf240a6ce3e813e8b3ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Coin: {fileID: 8300000, guid: 0bc69589918a447fc8e38dd9bcb545fa, type: 3}
+  Gate: {fileID: 0}
+  Wind: {fileID: 8300000, guid: 17a4c0e0be0d64f1d958bba832f82e9f, type: 3}
+  SpringBoard: {fileID: 8300000, guid: 080d6a0a36a1f432889051e8d221f98f, type: 3}
+  Spring: {fileID: 8300000, guid: d9b4f584581e649a6a545f7dfc563e82, type: 3}
 --- !u!1 &3377430343832220929
 GameObject:
   m_ObjectHideFlags: 0
