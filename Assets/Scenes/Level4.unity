@@ -287,6 +287,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: monster2
       objectReference: {fileID: 0}
+    - target: {fileID: 3377430343214637985, guid: e0821195bc00bbe49a94d4514347eb38,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3377430343214637988, guid: e0821195bc00bbe49a94d4514347eb38,
         type: 3}
       propertyPath: m_RootOrder
@@ -1239,7 +1244,7 @@ RectTransform:
   - {fileID: 1631440982}
   - {fileID: 1516991739}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3022,6 +3027,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: monster1
       objectReference: {fileID: 0}
+    - target: {fileID: 3377430343214637985, guid: e0821195bc00bbe49a94d4514347eb38,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3377430343214637988, guid: e0821195bc00bbe49a94d4514347eb38,
         type: 3}
       propertyPath: m_RootOrder
@@ -3689,7 +3699,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5871084197414657000
 PrefabInstance:
