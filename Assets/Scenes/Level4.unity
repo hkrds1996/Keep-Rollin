@@ -381,6 +381,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3377430343214637991, guid: e0821195bc00bbe49a94d4514347eb38, type: 3}
     - {fileID: 3377430343214637990, guid: e0821195bc00bbe49a94d4514347eb38, type: 3}
+    - {fileID: 4669878909960797454, guid: e0821195bc00bbe49a94d4514347eb38, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0821195bc00bbe49a94d4514347eb38, type: 3}
 --- !u!1 &180123557
 GameObject:
@@ -3121,6 +3122,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3377430343214637991, guid: e0821195bc00bbe49a94d4514347eb38, type: 3}
     - {fileID: 3377430343214637990, guid: e0821195bc00bbe49a94d4514347eb38, type: 3}
+    - {fileID: 4669878909960797454, guid: e0821195bc00bbe49a94d4514347eb38, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0821195bc00bbe49a94d4514347eb38, type: 3}
 --- !u!1 &1749899845 stripped
 GameObject:
@@ -3699,7 +3701,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5871084197414657000
 PrefabInstance:
