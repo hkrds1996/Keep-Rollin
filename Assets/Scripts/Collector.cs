@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 public class Collector : MonoBehaviour
 {
@@ -20,6 +21,13 @@ public class Collector : MonoBehaviour
         }
         else if(collider.tag == "Gate")
         {
+
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name+" passed", new Dictionary<string, object>
+            {
+                {"Score: ", Int32.Parse(SceneControlls.score) },
+                {"Budget Left: ", SceneControlls.budget[SceneManager.GetActiveScene().buildIndex - 1] }
+            });
+            Debug.Log("analyticsResult: " + analyticsResult);
             if (SceneManager.GetActiveScene().name == "Level6")
             {
 

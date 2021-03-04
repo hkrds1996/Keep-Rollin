@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Analytics;
 
 public class SinMove : MonoBehaviour
 {
@@ -66,6 +66,8 @@ public class SinMove : MonoBehaviour
 
         if (distance1 < 0.37)
         {
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + "HitMonster");
+            Debug.Log("analyticsResult: " + analyticsResult);
             System.Threading.Thread.Sleep(300);
             SceneControlls.restartGameSub();
         }

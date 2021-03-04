@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 public class SceneControlls : MonoBehaviour
 {
     public static string materialType = "0";
@@ -12,13 +13,21 @@ public class SceneControlls : MonoBehaviour
     public static string score = "0";
     public static Dictionary<GameObject, int> map = new Dictionary<GameObject, int>();
 
+
+    public void LogRestart()
+    {
+        AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + "Restarted");
+        Debug.Log("analyticsResult: " + analyticsResult);
+    }
     public void RestartGame()
     {
+        LogRestart();
         restartGameSub();
     }
 
     public void NewGame()
     {
+        LogRestart();
         CustomLoadScreen(SceneManager.GetActiveScene().name);
     }
 
