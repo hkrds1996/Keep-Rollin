@@ -17,8 +17,7 @@ public class DrawLine : MonoBehaviour
     private int budget;
 
     void Start()
-    {
-        
+    {        
     }
 
     // Update is called once per frame
@@ -96,6 +95,5 @@ public class DrawLine : MonoBehaviour
         }else{
             return 10;
         }
-    }
-
+    }   
 }

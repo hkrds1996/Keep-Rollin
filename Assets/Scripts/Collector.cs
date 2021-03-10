@@ -12,7 +12,7 @@ public class Collector : MonoBehaviour
     {
         if(collider.tag == "star")
         {
-            int socre = Int32.Parse(SceneControlls.score);
+            int socre = SceneControlls.score;
             Destroy(collider.gameObject);
             socre ++;
             SceneControlls.ChangeScore(socre);
@@ -21,17 +21,20 @@ public class Collector : MonoBehaviour
         }
         else if(collider.tag == "Gate")
         {
-
             AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name+" passed", new Dictionary<string, object>
             {
-                {"Score: ", Int32.Parse(SceneControlls.score) },
+                {"Score: ", SceneControlls.score },
                 {"Budget Left: ", SceneControlls.budget[SceneManager.GetActiveScene().buildIndex - 1] }
             });
             Debug.Log("analyticsResult: " + analyticsResult);
+
+            // update current level's scord
+            SceneControlls.addScore(SceneManager.GetActiveScene().buildIndex, SceneControlls.getBudget(), SceneControlls.getScore());
+
             if (SceneManager.GetActiveScene().name == "Level6")
             {
 
-                SceneManager.LoadScene("HomeScreen");
+                SceneControlls.CustomLoadScreen("HomeScreen");
             }
             else
             {
