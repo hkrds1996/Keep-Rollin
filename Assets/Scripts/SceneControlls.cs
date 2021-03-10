@@ -21,17 +21,10 @@ public class SceneControlls : MonoBehaviour
 
     public static int score = 0;
 
-    public static PlayerData playerData; //玩家对象
+    public static PlayerData playerData = new PlayerData(); //玩家对象
 
     private static string path; //文件的路径
 
-    // Use this for initialization
-    void Awake()
-    {
-        //在游戏刚刚运行时，选择游戏路径并载入数据（目前只有关卡游戏记录 后期加入音效开关等载入数据）
-        SetPath();
-        LoadPlayerData();
-    }
 
     //获取关卡当前星星分数（游戏记录使用）
     public static int getScore()
@@ -80,9 +73,6 @@ public class SceneControlls : MonoBehaviour
 
             playerData.list_levelScore[index - 1].Insert(i, record);
         }
-
-        //保存写入到本地文档中
-        SavePlayerData();
     }
 
     public static List<List<PlayerLevelRecord>> getPlayerData()
@@ -92,57 +82,8 @@ public class SceneControlls : MonoBehaviour
 
     public PlayerData LoadPlayerData()
     {
-        //如果路径上有文件，就读取文件
-        if (File.Exists(path))
-        {
-            //读取数据
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(path, FileMode.Open);
-            playerData = (PlayerData) bf.Deserialize(file);
-            file.Close();
-        }
-        else
-        //如果没有文件，就new出一个PlayerData
-        {
-            playerData = new PlayerData();
-        }
-        Debug.Log("----------Game Record----------");
-        for (int i = 0; i < playerData.list_levelScore.Count; i++)
-        {
-            Debug.Log("-----Game level " + i + " -----");
-            for (int j = 0; j < playerData.list_levelScore[i].Count; j++)
-            {
-                Debug.Log("---Record " + j + " ---");
-                Debug
-                    .Log("playerScore: " +
-                    playerData.list_levelScore[i][j].playerScore);
-                Debug
-                    .Log("starCount: " +
-                    playerData.list_levelScore[i][j].starCount);
-            }
-        }
+                
         return playerData;
-    }
-
-    //保存玩家的数据
-    public static void SavePlayerData()
-    {
-        //保存数据
-        Debug.Log("saving player data");
-        BinaryFormatter bf = new BinaryFormatter();
-        if (File.Exists(path))
-        {
-            File.Delete (path);
-        }
-        FileStream file = File.Create(path);
-        bf.Serialize (file, playerData);
-        file.Close();
-    }
-
-    //设置文件的路径，在手机上运行时Application.streamingAssetsPath这个路径才是可以读写的路径
-    void SetPath()
-    {
-        path = Application.streamingAssetsPath + "/Recall_Score/playerData.gd";
     }
 
     //玩家每一关获得的星星和分数

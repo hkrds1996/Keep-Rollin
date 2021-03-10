@@ -10,9 +10,6 @@ using UnityEngine.UI;
 public class getScore : MonoBehaviour
 {
 
-    private static string
-        path = Application.streamingAssetsPath + "/Recall_Score/playerData.gd"; //文件的路径
-
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +22,11 @@ public class getScore : MonoBehaviour
         {
             for (int j = 0; j < playerData[i].Count; ++j)
             {
-                originScoreString +=
+                originScoreString += " Level: "+
                     (i + 1).ToString() +
-                    " " +
+                    " " + "Score: "+
                     playerData[i][j].starCount.ToString() +
-                    " " +
+                    " " + "Budget Left: "+
                     playerData[i][j].playerScore.ToString() +
                     "\n";
             }
