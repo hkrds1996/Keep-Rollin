@@ -9,6 +9,8 @@ TagManager:
   - PlayerBall
   - Gate
   - RankBox
+  - Line
+  - MainCanvas
   layers:
   - Default
   - TransparentFX

@@ -25,6 +25,9 @@ public class SceneControlls : MonoBehaviour
 
     private static string path; //文件的路径
 
+    
+
+
 
     //获取关卡当前星星分数（游戏记录使用）
     public static int getScore()
@@ -163,6 +166,64 @@ public class SceneControlls : MonoBehaviour
         {
             ChangeBudget(budget[SceneManager.GetActiveScene().buildIndex - 1]);
         }
+
+        if (GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Dynamic)
+        {
+            if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - GameObject.FindGameObjectWithTag("MainCamera").transform.position.y > 3.9f)
+            {
+                GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - 3.9f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+                GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y + 267.6f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+            }
+            else if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - GameObject.FindGameObjectWithTag("MainCamera").transform.position.y < -3.9f)
+            {
+                GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y + 3.9f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+                GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y + 275.4f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+            }
+
+
+
+            if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x - GameObject.FindGameObjectWithTag("MainCamera").transform.position.x > 7.3f)
+            {
+                GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x - 7.3f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+                GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x + 477.2f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+            }
+            else if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x - GameObject.FindGameObjectWithTag("MainCamera").transform.position.x < -7.3f)
+            {
+                GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x + 7.3f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+                GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x + 491.8f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+            }
+        }
+    }
+
+    public void ResetCamera()
+    {
+        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(0.0f, 1.0f, -10.0f);
+        GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(484.5f, 272.5f, 0.0f);
+    }
+
+    public void CameraUp()
+    {
+        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y+1.8f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+        GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y + 1.8f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+
+    }
+    public void CameraDown()
+    {
+        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y - 1.8f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+        GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y - 1.8f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+
+    }
+    public void CameraLeft ()
+    {
+        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x-4.6f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+        GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x - 4.6f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+
+    }
+    public void CameraRight()
+    {
+        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x + 4.6f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+        GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x + 4.6f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+
     }
 
     public void StartGame()
