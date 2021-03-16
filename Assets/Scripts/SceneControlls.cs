@@ -25,10 +25,6 @@ public class SceneControlls : MonoBehaviour
 
     private static string path; //文件的路径
 
-    
-
-
-
     //获取关卡当前星星分数（游戏记录使用）
     public static int getScore()
     {
@@ -56,21 +52,22 @@ public class SceneControlls : MonoBehaviour
         //如果遇到新关卡没有数据 new一个新的record list 并将当前记录加入
         if (playerData.list_levelScore.Count < index)
         {
-            while(playerData.list_levelScore.Count < index){
-                playerData.list_levelScore.Add(new List<PlayerLevelRecord>());            
-            }            
+            while (playerData.list_levelScore.Count < index)
+            {
+                playerData.list_levelScore.Add(new List<PlayerLevelRecord>());
+            }
             playerData.list_levelScore[index - 1].Add(record);
         }
         else
         //已有记录 按顺序插入 获得星星权重最高 星星一样比较剩余budget
         {
             int i = 0;
-            while (playerData.list_levelScore[index - 1][i].starCount > score ||
+            while (i < playerData.list_levelScore[index - 1].Count && (playerData.list_levelScore[index - 1][i].starCount > score ||
                 (
                 playerData.list_levelScore[index - 1][i].starCount == score &&
                 playerData.list_levelScore[index - 1][i].playerScore >
                 budgetLeft
-                )
+                ))
             )
             i++;
 
@@ -85,7 +82,6 @@ public class SceneControlls : MonoBehaviour
 
     public PlayerData LoadPlayerData()
     {
-                
         return playerData;
     }
 
@@ -102,7 +98,8 @@ public class SceneControlls : MonoBehaviour
     [Serializable]
     public class PlayerData
     {
-        public static PlayerData Instance { get; private set;}
+        public static PlayerData Instance { get; private set; }
+
         //玩家数据
         public List<List<PlayerLevelRecord>>
             list_levelScore = new List<List<PlayerLevelRecord>>(); //每关的星星和分数
@@ -164,66 +161,168 @@ public class SceneControlls : MonoBehaviour
             SceneManager.GetActiveScene().buildIndex - 1 >= 0
         )
         {
-            ChangeBudget(budget[SceneManager.GetActiveScene().buildIndex - 1]);
-        }
-
-        if (GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Dynamic)
-        {
-            if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - GameObject.FindGameObjectWithTag("MainCamera").transform.position.y > 3.9f)
-            {
-                GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - 3.9f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
-                GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y + 267.6f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
-            }
-            else if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - GameObject.FindGameObjectWithTag("MainCamera").transform.position.y < -3.9f)
-            {
-                GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y + 3.9f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
-                GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y + 275.4f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
-            }
-
-
-
-            if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x - GameObject.FindGameObjectWithTag("MainCamera").transform.position.x > 7.3f)
-            {
-                GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x - 7.3f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
-                GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x + 477.2f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
-            }
-            else if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x - GameObject.FindGameObjectWithTag("MainCamera").transform.position.x < -7.3f)
-            {
-                GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x + 7.3f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
-                GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x + 491.8f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
-            }
+            ChangeBudget(budget[SceneManager.GetActiveScene().buildIndex - 1]);            
         }
     }
 
     public void ResetCamera()
     {
-        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(0.0f, 1.0f, -10.0f);
-        GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(484.5f, 272.5f, 0.0f);
+        GameObject.FindGameObjectWithTag("MainCamera").transform.position =
+            new Vector3(0.0f, 1.0f, -10.0f);
+        GameObject.FindGameObjectWithTag("MainCanvas").transform.position =
+            new Vector3(484.5f, 272.5f, 0.0f);
     }
 
     public void CameraUp()
     {
-        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y+1.8f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
-        GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y + 1.8f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
-
+        GameObject.FindGameObjectWithTag("MainCamera").transform.position =
+            new Vector3(GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .x,
+                GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .y +
+                1.8f,
+                GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .z);
+        GameObject.FindGameObjectWithTag("MainCanvas").transform.position =
+            new Vector3(GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .x,
+                GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .y +
+                1.8f,
+                GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .z);
     }
+
     public void CameraDown()
     {
-        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y - 1.8f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
-        GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y - 1.8f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
-
+        GameObject.FindGameObjectWithTag("MainCamera").transform.position =
+            new Vector3(GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .x,
+                GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .y -
+                1.8f,
+                GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .z);
+        GameObject.FindGameObjectWithTag("MainCanvas").transform.position =
+            new Vector3(GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .x,
+                GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .y -
+                1.8f,
+                GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .z);
     }
-    public void CameraLeft ()
+
+    public void CameraLeft()
     {
-        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x-4.6f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
-        GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x - 4.6f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
-
+        GameObject.FindGameObjectWithTag("MainCamera").transform.position =
+            new Vector3(GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .x -
+                4.6f,
+                GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .y,
+                GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .z);
+        GameObject.FindGameObjectWithTag("MainCanvas").transform.position =
+            new Vector3(GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .x -
+                4.6f,
+                GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .y,
+                GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .z);
     }
+
     public void CameraRight()
     {
-        GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x + 4.6f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
-        GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x + 4.6f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
-
+        GameObject.FindGameObjectWithTag("MainCamera").transform.position =
+            new Vector3(GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .x +
+                4.6f,
+                GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .y,
+                GameObject
+                    .FindGameObjectWithTag("MainCamera")
+                    .transform
+                    .position
+                    .z);
+        GameObject.FindGameObjectWithTag("MainCanvas").transform.position =
+            new Vector3(GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .x +
+                4.6f,
+                GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .y,
+                GameObject
+                    .FindGameObjectWithTag("MainCanvas")
+                    .transform
+                    .position
+                    .z);
     }
 
     public void StartGame()
@@ -320,8 +419,6 @@ public class SceneControlls : MonoBehaviour
     {
         CustomLoadScreen("Level3");
     }
-
-
 
     public void LoadScene4()
     {
