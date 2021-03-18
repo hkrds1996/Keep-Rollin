@@ -48,7 +48,11 @@ public class DrawLine : MonoBehaviour
                 Vector3 pos = Input.mousePosition;
                 Collider2D hitCollider = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(pos));
                 if (hitCollider != null && hitCollider.CompareTag ("Line")) {
-                    AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + " used Eraser");
+                    AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + " used Eraser", new Dictionary<string, object>
+            {
+                {"Time: ", DateTime.Now.ToString() },
+                
+            });
                     Debug.Log("analyticsResult: " + analyticsResult);
                     SceneControlls.RemoveLine(hitCollider.gameObject);
                 }
@@ -82,7 +86,11 @@ public class DrawLine : MonoBehaviour
         lineRenderer.SetPosition(1, fingerPositions[1]);
         edgeCollider.points = fingerPositions.ToArray();      
         GameObject.DontDestroyOnLoad(currentLine);
-        AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + " used line type: " + materialType.ToString());
+        AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + " used line type: " + materialType.ToString(), new Dictionary<string, object>
+            {
+                {"Time: ", DateTime.Now.ToString() },
+
+            });
         Debug.Log("analyticsResult: " + analyticsResult);
     }
 

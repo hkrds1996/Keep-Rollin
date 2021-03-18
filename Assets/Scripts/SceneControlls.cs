@@ -112,9 +112,12 @@ public class SceneControlls : MonoBehaviour
 
     public void LogRestart()
     {
-        AnalyticsResult analyticsResult =
-            Analytics
-                .CustomEvent(SceneManager.GetActiveScene().name + "Restarted");
+        AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + "Restarted", new Dictionary<string, object>
+            {
+                {"Time: ", DateTime.Now.ToString() },
+
+            });
+       
         Debug.Log("analyticsResult: " + analyticsResult);
     }
 

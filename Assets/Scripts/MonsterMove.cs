@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
-
+using System;
 public class MonsterMove : MonoBehaviour
 {
 
@@ -62,7 +62,11 @@ public class MonsterMove : MonoBehaviour
 
         if (distance1 < 0.37)
         {
-            AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + "HitMonster");
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + "HitMonster", new Dictionary<string, object>
+            {
+                {"Time: ", DateTime.Now.ToString() },
+
+            });
             Debug.Log("analyticsResult: " + analyticsResult);
             System.Threading.Thread.Sleep(200);
             SceneControlls.restartGameSub();

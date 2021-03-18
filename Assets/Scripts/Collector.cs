@@ -23,7 +23,7 @@ public class Collector : MonoBehaviour
         {
             AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name+" passed", new Dictionary<string, object>
             {
-                {"Score: ", SceneControlls.score },
+                {"Score: "+SceneControlls.score.ToString(),  DateTime.Now.ToString()},
                 {"Budget Left: ", SceneControlls.budget[SceneManager.GetActiveScene().buildIndex - 1] }
             });
             Debug.Log("analyticsResult: " + analyticsResult);
