@@ -161,7 +161,40 @@ public class SceneControlls : MonoBehaviour
             SceneManager.GetActiveScene().buildIndex - 1 >= 0
         )
         {
-            ChangeBudget(budget[SceneManager.GetActiveScene().buildIndex - 1]);            
+            ChangeBudget(budget[SceneManager.GetActiveScene().buildIndex - 1]);
+            if (GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Dynamic)
+            {
+                if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y < -20.0f)
+                {
+                    ResetCamera();
+                    RestartGame();
+                 
+                }
+                if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - GameObject.FindGameObjectWithTag("MainCamera").transform.position.y > 3.9f)
+                {
+                    GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - 3.9f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+                    GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y + 267.6f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+                }
+                else if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - GameObject.FindGameObjectWithTag("MainCamera").transform.position.y < -3.9f)
+                {
+                    GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y + 3.9f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+                    GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y + 275.4f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+                }
+
+
+
+                if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x - GameObject.FindGameObjectWithTag("MainCamera").transform.position.x > 7.3f)
+                {
+                    GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x - 7.3f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+                    GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x + 477.2f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+                }
+                else if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x - GameObject.FindGameObjectWithTag("MainCamera").transform.position.x < -7.3f)
+                {
+                    GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x + 7.3f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
+                    GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x + 491.8f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
+                }
+            }
+                
         }
     }
 
