@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-
+using UnityEngine.Analytics;
+using System;
 public class SinMove : MonoBehaviour
 {
 
@@ -21,8 +21,6 @@ public class SinMove : MonoBehaviour
     private float width;
     private float height;
     GameObject obj1;
-
-    public AudioSource ac;
 
     float tempX = 0f;
     float tempY = 0f;
@@ -68,7 +66,12 @@ public class SinMove : MonoBehaviour
 
         if (distance1 < 0.37)
         {
-            ac.Play();
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + "HitMonster", new Dictionary<string, object>
+            {
+                {"Time: ", DateTime.Now.ToString() },
+
+            });
+            Debug.Log("analyticsResult: " + analyticsResult);
             System.Threading.Thread.Sleep(300);
             SceneControlls.restartGameSub();
         }

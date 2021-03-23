@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/HomeScreen.unity
     guid: f25b9d4935b7819478dab14a8ffb8ac7
@@ -32,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Instructions.unity
     guid: 9c2288fcbb28ff248a40a0d189169545
+  - enabled: 1
+    path: Assets/Scenes/ScoreBoard.unity
+    guid: 53645a409faf74f6c85058be35f2f479
   m_configObjects: {}

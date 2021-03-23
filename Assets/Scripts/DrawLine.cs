@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.Analytics;
 public class DrawLine : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -17,8 +17,7 @@ public class DrawLine : MonoBehaviour
     private int budget;
 
     void Start()
-    {
-        
+    {        
     }
 
     // Update is called once per frame
@@ -35,6 +34,7 @@ public class DrawLine : MonoBehaviour
                 Vector2 tempFingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 float distance = Vector2.Distance(tempFingerPos, fingerPositions[fingerPositions.Count-1]);
                 if (distance>0.1f){
+               
                     UpdateLine(tempFingerPos);
                     int oldBudget  = budget;
                     budget = (int)(budget - distance*costOfMaterial(materialType));
@@ -47,7 +47,13 @@ public class DrawLine : MonoBehaviour
             if(Input.GetMouseButtonDown(0)){
                 Vector3 pos = Input.mousePosition;
                 Collider2D hitCollider = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(pos));
-                if (hitCollider != null && hitCollider.CompareTag ("Line")) {                    
+                if (hitCollider != null && hitCollider.CompareTag ("Line")) {
+                    AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + " used Eraser", new Dictionary<string, object>
+            {
+                {"Time: ", DateTime.Now.ToString() },
+                
+            });
+                    Debug.Log("analyticsResult: " + analyticsResult);
                     SceneControlls.RemoveLine(hitCollider.gameObject);
                 }
             }
@@ -62,10 +68,12 @@ public class DrawLine : MonoBehaviour
         }
         else if (materialType == 1)
         {
+          
             linePrefab = (GameObject)Resources.Load("MetalLine", typeof(GameObject));
         }
         else if(materialType == 2)
         {
+            
             linePrefab = (GameObject)Resources.Load("WoodLine", typeof(GameObject));
         }
         currentLine = Instantiate(linePrefab, Vector3.zero, Quaternion.identity);
@@ -77,7 +85,13 @@ public class DrawLine : MonoBehaviour
         lineRenderer.SetPosition(0, fingerPositions[0]);
         lineRenderer.SetPosition(1, fingerPositions[1]);
         edgeCollider.points = fingerPositions.ToArray();      
-        GameObject.DontDestroyOnLoad(currentLine);  
+        GameObject.DontDestroyOnLoad(currentLine);
+        AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + " used line type: " + materialType.ToString(), new Dictionary<string, object>
+            {
+                {"Time: ", DateTime.Now.ToString() },
+
+            });
+        Debug.Log("analyticsResult: " + analyticsResult);
     }
 
     void UpdateLine(Vector2 newFingerPos)
@@ -96,6 +110,5 @@ public class DrawLine : MonoBehaviour
         }else{
             return 10;
         }
-    }
-
+    }   
 }

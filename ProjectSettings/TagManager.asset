@@ -8,7 +8,11 @@ TagManager:
   - star
   - PlayerBall
   - Gate
+  - RankBox
   - Line
+  - MainCanvas
+  - SpringBoard
+  - Spring
   - WindField
   layers:
   - Default

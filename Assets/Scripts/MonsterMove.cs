@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Events;
-
+using UnityEngine.Analytics;
+using System;
 public class MonsterMove : MonoBehaviour
 {
 
     public float speed;
     private bool moveRight;
     private bool moveUp;
-    private bool isPlayed;
     public Rigidbody rig;
     public float force;
     public bool isHorizontal;
@@ -23,17 +22,12 @@ public class MonsterMove : MonoBehaviour
     private float height;
     GameObject obj1;
 
-    public AudioSource ac;
-
     float tempX = 0f;
     float tempY = 0f;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        ac = GetComponent<AudioSource>();
-        isPlayed = false;
         moveRight = true;
         moveUp = true;
         if (isHorizontal)
@@ -65,19 +59,22 @@ public class MonsterMove : MonoBehaviour
 
         float distance1 = (player_postion1 - this.transform.position).magnitude;
 
-        if (distance1 < 0.37 && !isPlayed)
-        {
-            isPlayed = true;
-            this.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            PlayAudio(GetComponent<AudioSource>().clip);
-        }
 
+        if (distance1 < 0.37)
+        {
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + "HitMonster", new Dictionary<string, object>
+            {
+                {"Time: ", DateTime.Now.ToString() },
+
+            });
+            Debug.Log("analyticsResult: " + analyticsResult);
+            System.Threading.Thread.Sleep(200);
+            SceneControlls.restartGameSub();
+        }
 
         tempX = Mathf.Clamp(transform.position.x, leftBorder, rightBorder);
         tempY = Mathf.Clamp(transform.position.y, downBorder, topBorder);
         transform.position = new Vector3(tempX, tempY, transform.position.z);
-        
 
         if (isHorizontal)
         {
@@ -108,30 +105,5 @@ public class MonsterMove : MonoBehaviour
                 moveUp = true;
             }
         }
-    }
-
-    public void PlayAudio(AudioClip clip, UnityAction callback = null, bool isLoop = false)
-    {
-        //获取自身音频文件进行播放并且不重复播放
-        ac.clip = clip;
-        ac.loop = isLoop;
-        ac.Play();
-        //执行协成获取音频文件的时间
-        StartCoroutine(AudioPlayFinished(ac.clip.length, callback));
-    }
-
-    private IEnumerator AudioPlayFinished(float time, UnityAction callback)
-    {
-
-
-        yield return new WaitForSeconds(time);
-        //声音播放完毕后之下往下的代码  
-
-        GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        SceneControlls.materialType = "0";
-        SceneControlls.score = "0";
-
-
     }
 }
