@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 2002882775641006484}
   - component: {fileID: 2002882775641006485}
   m_Layer: 0
-  m_Name: SpringBoard 1
-  m_TagString: Untagged
+  m_Name: SpringBoard
+  m_TagString: SpringBoard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

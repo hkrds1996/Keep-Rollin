@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
 using System;
+using UnityEngine.Events;
 public class MonsterMove : MonoBehaviour
 {
 
@@ -13,6 +14,7 @@ public class MonsterMove : MonoBehaviour
     public Rigidbody rig;
     public float force;
     public bool isHorizontal;
+    public AudioSource ac;
 
     public float leftBorder;
     public float rightBorder;
@@ -20,6 +22,7 @@ public class MonsterMove : MonoBehaviour
     public float downBorder;
     private float width;
     private float height;
+    private bool isPlayed;
     GameObject obj1;
 
     float tempX = 0f;
@@ -28,6 +31,8 @@ public class MonsterMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ac = GetComponent<AudioSource>();
+        isPlayed = false;
         moveRight = true;
         moveUp = true;
         if (isHorizontal)
@@ -68,8 +73,14 @@ public class MonsterMove : MonoBehaviour
 
             });
             Debug.Log("analyticsResult: " + analyticsResult);
-            System.Threading.Thread.Sleep(200);
-            SceneControlls.restartGameSub();
+            if(!isPlayed){
+                isPlayed = true;
+                this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                PlayAudio(GetComponent<AudioSource>().clip);
+            }else{
+                SceneControlls.restartGameSub();
+            }           
         }
 
         tempX = Mathf.Clamp(transform.position.x, leftBorder, rightBorder);
@@ -105,5 +116,18 @@ public class MonsterMove : MonoBehaviour
                 moveUp = true;
             }
         }
+    }
+    public void PlayAudio(AudioClip clip, UnityAction callback = null, bool isLoop = false)
+    {
+        ac.clip = clip;
+        ac.loop = isLoop;
+        ac.Play();
+        StartCoroutine(AudioPlayFinished(ac.clip.length, callback));
+    }
+
+    private IEnumerator AudioPlayFinished(float time, UnityAction callback)
+    {
+        yield return new WaitForSeconds(time);
+        SceneControlls.restartGameSub();
     }
 }

@@ -11,6 +11,9 @@ TagManager:
   - RankBox
   - Line
   - MainCanvas
+  - Spring
+  - SpringBoard
+  - WindField
   layers:
   - Default
   - TransparentFX
