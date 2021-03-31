@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6226450576896317110}
   - component: {fileID: -513809284969542146}
   - component: {fileID: -1797921314866547009}
-  - component: {fileID: 4307955470409866017}
+  - component: {fileID: 6844736378626943180}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Gate
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.5
---- !u!82 &4307955470409866017
+--- !u!82 &6844736378626943180
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,7 +132,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 740a1105691b341339fc2d870bf64121, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
