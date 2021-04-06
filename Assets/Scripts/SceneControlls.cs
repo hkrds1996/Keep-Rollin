@@ -377,8 +377,15 @@ public class SceneControlls : MonoBehaviour
 
     public void ExitGame()
     {
+        StartCoroutine(DoExit());
+    }
+
+    public IEnumerator DoExit()
+    {
+        yield return new WaitForSeconds(1.0f);
         Application.Quit();
     }
+
 
     public static void ChangeType(int n)
     {

@@ -31,27 +31,17 @@ public class Collector : MonoBehaviour
             GameObject.FindGameObjectWithTag("scorebox").GetComponent<Text>().text = s;
         }
         else if(collider.tag == "Gate")
-        {
-            PlayGateAudio(GetComponent<AudioSource>().clip);
+        {            
             AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name+" passed", new Dictionary<string, object>
             {
                 {"Score: "+SceneControlls.score.ToString(),  DateTime.Now.ToString()},
                 {"Budget Left: ", SceneControlls.budget[SceneManager.GetActiveScene().buildIndex - 1] }
             });
-            Debug.Log("analyticsResult: " + analyticsResult);
-
+            GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             // update current level's scord
-            SceneControlls.addScore(SceneManager.GetActiveScene().buildIndex, SceneControlls.getBudget(), SceneControlls.getScore());
-
-            if (SceneManager.GetActiveScene().name == "Level6")
-            {
-
-                SceneControlls.CustomLoadScreen("HomeScreen");
-            }
-            else
-            {
-                SceneControlls.CustomLoadScreen("Level"+(SceneManager.GetActiveScene().buildIndex + 1));
-            }
+            SceneControlls.addScore(SceneManager.GetActiveScene().buildIndex, SceneControlls.getBudget(), SceneControlls.getScore());            
+            PlayGateAudio(GetComponent<AudioSource>().clip);
+            
         }else if(collider.tag == "WindField"){
             PlayAudio(Wind);
         }
@@ -80,10 +70,8 @@ public class Collector : MonoBehaviour
 
     private IEnumerator AudioPlayFinished(float time, UnityAction callback)
     {
-
-
+        
         yield return new WaitForSeconds(time);
-
         if (SceneManager.GetActiveScene().name == "Level6")
         {
 

@@ -82,9 +82,7 @@ public class SinMove : MonoBehaviour
                 this.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
                 PlayAudio(GetComponent<AudioSource>().clip);
-            }else{
-                SceneControlls.restartGameSub();
-            }           
+            }     
         }
 
         tempX = Mathf.Clamp(transform.position.x, leftBorder, rightBorder);
