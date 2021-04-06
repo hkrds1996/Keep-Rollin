@@ -441,6 +441,9 @@ public class SceneControlls : MonoBehaviour
         CustomLoadScreen("Instructions");
     }
 
+    public void LoadLevelSelect(){
+        CustomLoadScreen("LevelSelect");
+    }
     public void LoadScene1()
     {
         CustomLoadScreen("Level1");
