@@ -6,7 +6,7 @@ public class TabGroup : MonoBehaviour
 {
     // Start is called before the first frame update
     public List<TabChoice> TabChoices;
-    public Sprite tabIdle;
+    public List<Sprite> OriginTabChoices;
     public Sprite tabHover;
     public Sprite tabActive;
     public TabChoice selectedTab;
@@ -18,8 +18,10 @@ public class TabGroup : MonoBehaviour
     public void Subscribe(TabChoice choice){
         if(TabChoices == null){
             TabChoices = new List<TabChoice>();
+            OriginTabChoices = new List<Sprite>();
         }
         TabChoices.Add(choice);
+        OriginTabChoices.Add(choice.background.sprite);
     }
 
     public void OnTabEnter(TabChoice choice){
@@ -42,11 +44,11 @@ public class TabGroup : MonoBehaviour
     }
 
     public void ResetTabs(){
-        foreach(TabChoice choice in TabChoices){
-            if(selectedTab!=null && choice == selectedTab){
+        for(int i = 0; i < TabChoices.Count; ++i){
+            if(selectedTab!=null && TabChoices[i] == selectedTab){                
                 continue;
             }
-            choice.background.sprite = tabIdle;
+            TabChoices[i].background.sprite = OriginTabChoices[i];
         }
     }
     public void PlayAudio(AudioClip clip, UnityAction callback = null, bool isLoop = false)
