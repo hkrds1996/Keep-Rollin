@@ -499,12 +499,7 @@ public class SceneControlls : MonoBehaviour
         }
         else
         {
-            SceneManager
-                .LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-            materialType = "0";
-            budget[SceneManager.GetActiveScene().buildIndex - 2] =
-                defaultBudget[SceneManager.GetActiveScene().buildIndex - 2];
-            score = 0;
+            SceneControlls.CustomLoadScreen("Level" + (SceneManager.GetActiveScene().buildIndex + 1));
         }
     }
 }
