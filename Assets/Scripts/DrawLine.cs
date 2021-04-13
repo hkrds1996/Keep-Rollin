@@ -108,7 +108,7 @@ public class DrawLine : MonoBehaviour
         }else if(type == 1){
             return 50;
         }else{
-            return 20;
+            return 30;
         }
     }   
 }
