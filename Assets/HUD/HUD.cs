@@ -9,6 +9,7 @@ namespace VolumeControler
     {
         public Toggle mute;
         public Slider slider;
+        public static bool flagDraw;
 
         public GameObject menu;
         public Button openMenu;
@@ -16,6 +17,7 @@ namespace VolumeControler
 
         private void Awake()
         {
+            flagDraw = true;
             menu.SetActive(false);
 
             Button openbt = openMenu.GetComponent<Button>();
@@ -56,12 +58,14 @@ namespace VolumeControler
         }
         void OpenMenu()
         {
+            flagDraw = false;
             menu.SetActive(true);
             Time.timeScale = 0;
         }
 
         void CloseMenu()
         {
+            flagDraw = true;
             menu.SetActive(false);
             Time.timeScale = 1;
         }

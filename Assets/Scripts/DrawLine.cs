@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
+using VolumeControler;
 public class DrawLine : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -25,7 +26,7 @@ public class DrawLine : MonoBehaviour
     {
         materialType = Int32.Parse(SceneControlls.materialType);
         budget = SceneControlls.budget[SceneManager.GetActiveScene().buildIndex - 1];
-        if(budget > 0 && materialType != 3){
+        if(budget > 0 && materialType != 3 && HUD.flagDraw){
             if (Input.GetMouseButtonDown(0))
             {
                 CreateLine();
@@ -43,7 +44,7 @@ public class DrawLine : MonoBehaviour
                 }
             }
         }
-        if(materialType == 3){
+        if(materialType == 3 && HUD.flagDraw){
             if(Input.GetMouseButtonDown(0)){
                 Vector3 pos = Input.mousePosition;
                 Collider2D hitCollider = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(pos));

@@ -12,9 +12,9 @@ public class SceneControlls : MonoBehaviour
 {
     public static string materialType = "0";
 
-    public static int[] budget = { 550, 550, 900, 850, 600, 450 };
+    public static int[] budget = { 550, 550, 900, 850, 600, 450 , 1000};
 
-    private static int[] defaultBudget = { 550, 550, 900, 850, 600, 450 };
+    private static int[] defaultBudget = { 550, 550, 900, 850, 600, 450, 1000 };
 
     public static Dictionary<GameObject, int>
         map = new Dictionary<GameObject, int>();
