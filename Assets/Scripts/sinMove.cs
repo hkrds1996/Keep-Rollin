@@ -26,7 +26,7 @@ public class SinMove : MonoBehaviour
     GameObject obj1;
 
     float tempX = 0f;
-    float tempY = 0f;
+    float tempY = 0f;   
 
     float archorX = 0f;
     float archorY = 0f;

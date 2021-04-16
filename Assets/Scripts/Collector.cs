@@ -75,7 +75,7 @@ public class Collector : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Level6")
         {
 
-            SceneManager.LoadScene("HomeScreen");
+            SceneControlls.CustomLoadScreen("HomeScreen");
         }
         else
         {

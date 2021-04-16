@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
 using VolumeControler;
@@ -34,15 +35,13 @@ public class DrawLine : MonoBehaviour
             if (Input.GetMouseButton(0)){
                 Vector2 tempFingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 float distance = Vector2.Distance(tempFingerPos, fingerPositions[fingerPositions.Count-1]);
-                if (distance>0.1f){
-               
-                    UpdateLine(tempFingerPos);
-                    int oldBudget  = budget;
-                    budget = (int)(budget - distance*costOfMaterial(materialType));
-                    SceneControlls.ChangeBudget(budget >=0? budget:0);
-                    SceneControlls.AddLineBudget(currentLine, oldBudget - (budget >=0? budget:0));                    
-                }
+                UpdateLine(tempFingerPos);
+                int oldBudget  = budget;    
+                budget = (int)(budget - distance*costOfMaterial(materialType));
+                SceneControlls.ChangeBudget(budget >=0? budget:0);
+                SceneControlls.AddLineBudget(currentLine, oldBudget - (budget >=0? budget:0));                                    
             }
+            
         }
         if(materialType == 3 && HUD.flagDraw){
             if(Input.GetMouseButtonDown(0)){

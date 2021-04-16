@@ -147,14 +147,14 @@ public class SceneControlls : MonoBehaviour
 
     public static void CustomLoadScreen(string name)
     {
-        DestroyAllTheLine();
-        SceneManager.LoadScene (name);
+        DestroyAllTheLine();        
         materialType = "0";
         for (int i = 0; i < budget.Length; ++i)
         {
             budget[i] = defaultBudget[i];
         }
         score = 0;
+        SceneManager.LoadScene (name);
     }
 
     public void Update()
@@ -494,13 +494,13 @@ public class SceneControlls : MonoBehaviour
 
     public void LoadPrevScreen()
     {
-        if (SceneManager.GetActiveScene().name == "Level1")
+        if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Instructions")
         {
             CustomLoadScreen("HomeScreen");
         }
         else
         {
-            SceneControlls.CustomLoadScreen("Level" + (SceneManager.GetActiveScene().buildIndex + 1));
+            SceneControlls.CustomLoadScreen("Level" + (SceneManager.GetActiveScene().buildIndex - 1));
         }
     }
 }
