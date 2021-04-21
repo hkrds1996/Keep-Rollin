@@ -508,7 +508,7 @@ public class SceneControlls : MonoBehaviour
         }
         else
         {
-            CustomLoadScreen("Level" + (SceneManager.GetActiveScene().buildIndex + 1));
+            CustomLoadScreen("Level" + (SceneManager.GetActiveScene().buildIndex - 1));
         }
     }
 
