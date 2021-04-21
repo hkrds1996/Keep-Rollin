@@ -7,10 +7,14 @@ public class ButtonInfo : MonoBehaviour
 {
     public int ItemID;
     public Text PriceText;
+    public Text StatusText;
     public GameObject ShopManager;
     // Update is called once per frame
     void Update()
     {
-        PriceText.text = "Price: " + ShopManager.GetComponent<ShopManagerScript>().shopItems[2,ItemID].ToString();
+        PriceText.text = "Price: " + ShopManagerScript.shopItems[2,ItemID].ToString();
+        if (ShopManagerScript.shopItems[3,ItemID] == 1){
+        	StatusText.text = "Status: Owned";
+        }
     }
 }

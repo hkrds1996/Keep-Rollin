@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-
+using UnityEngine.Analytics;
+using UnityEngine.Events;
+using System;
 public class SinMove : MonoBehaviour
 {
 
@@ -13,6 +14,7 @@ public class SinMove : MonoBehaviour
     public Rigidbody rig;
     public float force;
     public bool isHorizontal;
+    public AudioSource ac;
 
     public float leftBorder;
     public float rightBorder;
@@ -20,17 +22,20 @@ public class SinMove : MonoBehaviour
     public float downBorder;
     private float width;
     private float height;
+    private bool isPlayed;
     GameObject obj1;
 
     float tempX = 0f;
-    float tempY = 0f;
+    float tempY = 0f;   
 
     float archorX = 0f;
     float archorY = 0f;
 
     // Start is called before the first frame update
     void Start()
-    {
+    {        
+        ac = GetComponent<AudioSource>();
+        isPlayed = false;
         moveRight = true;
         moveUp = true;
         if (isHorizontal)
@@ -54,7 +59,7 @@ public class SinMove : MonoBehaviour
         width = rightBorder - leftBorder;
         height = topBorder - downBorder;
         archorX = Mathf.Clamp(transform.position.x, leftBorder, rightBorder);
-        archorY  = Mathf.Clamp(transform.position.y, downBorder, topBorder);
+        archorY = Mathf.Clamp(transform.position.y, downBorder, topBorder);
     }
 
     // Update is called once per frame
@@ -66,8 +71,18 @@ public class SinMove : MonoBehaviour
 
         if (distance1 < 0.37)
         {
-            System.Threading.Thread.Sleep(300);
-            SceneControlls.CustomLoadScreen(SceneManager.GetActiveScene().name);
+            AnalyticsResult analyticsResult = Analytics.CustomEvent(SceneManager.GetActiveScene().name + "HitMonster", new Dictionary<string, object>
+            {
+                {"Time: ", DateTime.Now.ToString() },
+
+            });
+            Debug.Log("analyticsResult: " + analyticsResult);
+            if(!isPlayed){
+                isPlayed = true;
+                this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                GameObject.FindGameObjectWithTag("PlayerBall").transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                PlayAudio(GetComponent<AudioSource>().clip);
+            }     
         }
 
         tempX = Mathf.Clamp(transform.position.x, leftBorder, rightBorder);
@@ -110,5 +125,18 @@ public class SinMove : MonoBehaviour
                 moveUp = true;
             }
         }
+    }
+    public void PlayAudio(AudioClip clip, UnityAction callback = null, bool isLoop = false)
+    {
+        ac.clip = clip;
+        ac.loop = isLoop;
+        ac.Play();
+        StartCoroutine(AudioPlayFinished(ac.clip.length, callback));
+    }
+
+    private IEnumerator AudioPlayFinished(float time, UnityAction callback)
+    {
+        yield return new WaitForSeconds(time);
+        SceneControlls.restartGameSub();
     }
 }
