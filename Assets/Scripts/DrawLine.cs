@@ -104,7 +104,7 @@ public class DrawLine : MonoBehaviour
 
     int costOfMaterial(int type){
         if(type == 0){
-            return 125;
+            return 110;
         }else if(type == 1){
             return 50;
         }else{

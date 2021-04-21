@@ -12,9 +12,9 @@ public class SceneControlls : MonoBehaviour
 {
     public static string materialType = "0";
 
-    public static int[] budget = { 350, 400, 800, 700, 300, 450 , 1000};
+    public static int[] budget = { 495, 495, 800, 435, 1250, 750 , 1000};
 
-    private static int[] defaultBudget = { 350, 400, 800, 700, 300, 450, 1000 };
+    private static int[] defaultBudget = { 495,495, 800, 435, 1250, 750, 1000 };
 
     public static Dictionary<GameObject, int>
         map = new Dictionary<GameObject, int>();
@@ -182,7 +182,7 @@ public class SceneControlls : MonoBehaviour
                     RestartGame();
                  
                 }
-                if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - GameObject.FindGameObjectWithTag("MainCamera").transform.position.y > 3.9f)
+               /* if (GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - GameObject.FindGameObjectWithTag("MainCamera").transform.position.y > 3.9f)
                 {
                     GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCamera").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y - 3.9f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
                     GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("MainCanvas").transform.position.x, GameObject.FindGameObjectWithTag("PlayerBall").transform.position.y + 267.6f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
@@ -205,6 +205,7 @@ public class SceneControlls : MonoBehaviour
                     GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x + 7.3f, GameObject.FindGameObjectWithTag("MainCamera").transform.position.y, GameObject.FindGameObjectWithTag("MainCamera").transform.position.z);
                     GameObject.FindGameObjectWithTag("MainCanvas").transform.position = new Vector3(GameObject.FindGameObjectWithTag("PlayerBall").transform.position.x + 491.8f, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.y, GameObject.FindGameObjectWithTag("MainCanvas").transform.position.z);
                 }
+               */
             }
                 
         }
