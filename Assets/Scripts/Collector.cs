@@ -72,7 +72,7 @@ public class Collector : MonoBehaviour
     {
         
         yield return new WaitForSeconds(time);
-        if (SceneManager.GetActiveScene().name == "Level6")
+        if (SceneManager.GetActiveScene().name == "Level6" || SceneManager.GetActiveScene().name == "Instructions")
         {
 
             SceneControlls.CustomLoadScreen("HomeScreen");

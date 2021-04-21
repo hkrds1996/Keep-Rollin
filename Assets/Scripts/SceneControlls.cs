@@ -12,9 +12,9 @@ public class SceneControlls : MonoBehaviour
 {
     public static string materialType = "0";
 
-    public static int[] budget = { 350, 400, 800, 700, 300, 450 };
+    public static int[] budget = { 350, 400, 800, 700, 300, 450 , 1000};
 
-    private static int[] defaultBudget = { 350, 400, 800, 700, 300, 450 };
+    private static int[] defaultBudget = { 350, 400, 800, 700, 300, 450, 1000 };
 
     public static Dictionary<GameObject, int>
         map = new Dictionary<GameObject, int>();
@@ -502,18 +502,18 @@ public class SceneControlls : MonoBehaviour
 
     public void LoadPrevScreen()
     {
-        if (SceneManager.GetActiveScene().name == "Level1")
+        if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Instructions" )
         {
             CustomLoadScreen("HomeScreen");
         }
         else
         {
-            SceneControlls.CustomLoadScreen("Level" + (SceneManager.GetActiveScene().buildIndex + 1));
+            CustomLoadScreen("Level" + (SceneManager.GetActiveScene().buildIndex + 1));
         }
     }
 
     public void LoadShopingScreen()
     {
-        CustomLoadScreen("shop2");
+        CustomLoadScreen("shop");
     }
 }
