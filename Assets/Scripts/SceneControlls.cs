@@ -505,7 +505,7 @@ public class SceneControlls : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Instructions" )
         {
-            CustomLoadScreen("HomeScreen");
+            CustomLoadScreen("LevelSelect");
         }
         else
         {
